@@ -78,13 +78,10 @@ class TideTask:
 def main():
     time_offset = predictions.AdditiveOffset(datetime.timedelta(minutes=179), datetime.timedelta(minutes=131))
     level_offset = predictions.MultiplicativeOffset(0.82, 1.15)
-    offset = predictions.TideOffset(time_offset, level_offset)
-
-    tt = TideTask(
-        '9414290',
-        offset,
-        (datetime.timedelta(days=1), datetime.timedelta(days=7)),
-        datetime.timedelta(days=1))
+    tide_offset = predictions.TideOffset(time_offset, level_offset)
+    query_range = (datetime.timedelta(days=1), datetime.timedelta(days=7))
+    renew_threshold = datetime.timedelta(days=1)
+    tt = TideTask('9414290', tide_offset, query_range, renew_threshold)
     tt.start()
     tide_now = tt.await_tide_now()
     print(tide_now)
