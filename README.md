@@ -25,8 +25,8 @@ The `predictions` module provides a tide prediction query interface.
 
 The `TidePrediction` class is the central data container. It represents a single tide maximum or minimum.
 
-* `time` - `datetime` object
-* `level` - `float` denoting height in feet, relative to MLLW (mean low low water)
+* `time` - `datetime` indicating time of tide shift
+* `level` - `float` denoting relative water level in feet, relative to MLLW (mean lower low water)
 * `type` - `string` denoting high tide `'H'` or low tide `'L'`
 
 #### `request_tide_predictions` Function
