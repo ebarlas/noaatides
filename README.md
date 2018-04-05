@@ -29,7 +29,7 @@ The `TidePrediction` class is the central data container. It represents a single
 * `level` - `float` denoting height in feet, relative to MLLW (mean low low water)
 * `type` - `string` denoting high tide `'H'` or low tide `'L'`
 
-### `request_tide_predictions` Function
+#### `request_tide_predictions` Function
 
 The `request_tide_predictions` function fetches tide predictions from the [CO-OPS API](https://tidesandcurrents.noaa.gov/api/) for
 a specific tide station over a specific time period. The following snippet loads high and low tide predictions for 
@@ -43,7 +43,7 @@ one_day = datetime.timedelta(days=1)
 tide_predictions = predictions.request_tide_predictions('9414290', now - one_day, now + one_day)
 ```
 
-### `TideOffset` Class
+#### `TideOffset` Class
 
 The `TideOffset` class provides a way to adjust tide predictions based on time and level offsets
 from a reference point. For example, the Petaluma River Upper Drawbridge tide station lags 179 minutes
@@ -56,7 +56,7 @@ offset = predictions.TideOffset(time_offset, level_offset)
 offset_predictions = offset.apply_all(tide_predictions)
 ```
 
-### `find_tide_pair` function
+#### `find_tide_pair` function
 
 The `find_tide_pair` function accepts a list of tide predictions and a `datetime` as input and returns
 a tuple with two tide predictions from the list that straddle the input time. If no such pair exists,
@@ -66,7 +66,7 @@ the function returns `None`.
 tide_pair = predictions.find_tide_pair(offset_predictions, now)
 ``` 
 
-### `tide_level` function
+#### `tide_level` function
 
 The `tide_level` function accepts a pair of tide predictions and a time as input and returns a float that
 denotes the tide level at the input time. The function estimates the tide level between the input anchors using 
@@ -81,7 +81,7 @@ level = predictions.tide_level(tide_pair[0], tide_pair[1], now)
 The `task` module provides a utility for querying tide predictions in a background daemon thread. 
 Foreground threads can query tide predictions from the background task.
 
-### `TideTask` Class
+#### `TideTask` Class
 
 ```python
 import datetime
