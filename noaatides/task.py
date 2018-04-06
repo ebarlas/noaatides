@@ -48,14 +48,16 @@ class TideTask:
             predictions.format_datetime(self.predictions[0].time),
             predictions.format_datetime(self.predictions[-1].time)))
 
-    def await_tide_now(self):
+    def await_tide(self, target_time):
         while True:
-            now = datetime.datetime.utcnow()
-            pair = predictions.find_tide_pair(self.predictions, now)
+            pair = predictions.find_tide_pair(self.predictions, target_time)
             if pair:
-                level = predictions.tide_level(pair[0], pair[1], now)
-                return TideNow(pair[0], pair[1], level, now)
+                level = predictions.tide_level(pair[0], pair[1], target_time)
+                return TideNow(pair[0], pair[1], level, target_time)
             time.sleep(1)
+
+    def await_tide_now(self):
+        return self.await_tide(datetime.datetime.utcnow())
 
     def _run_once(self):
         try:
