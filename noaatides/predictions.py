@@ -92,7 +92,7 @@ def request_tide_predictions(station_id, utc_from, utc_to):
         'interval': 'hilo',
     }
 
-    res = requests.get(url=URL_NOAA, params=params)
+    res = requests.get(url=URL_NOAA, params=params, timeout=10)
     res.raise_for_status()
     predictions = json.loads(res.text)['predictions']
     return [TidePrediction(parse_datetime(p['t']), float(p['v']), p['type']) for p in predictions]
