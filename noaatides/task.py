@@ -15,7 +15,7 @@ class TideNow:
         self.time = time
 
     def tide_rising(self):
-        return self.next_tide.high
+        return self.next_tide.high()
 
     def __str__(self):
         return 'prev_tide=[{}], next_tide=[{}], level={}, time={}'.format(
